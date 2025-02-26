@@ -1,0 +1,10 @@
+
+Flask==3.1.0
+tensorflow
+gunicorn
+requests==2.32.3
+cv2
+os
+pickle
+numpy
+
