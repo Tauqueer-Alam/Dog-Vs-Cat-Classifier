@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request
 import numpy as np
+import pickle
 import cv2
 import os
-from tensorflow.keras.models import load_model
 
-model = load_model("model.h5")
+model = pickle.load(open("model.pkl", "rb"))
 
 app = Flask(__name__)
 
@@ -33,7 +33,7 @@ def predict():
     image = cv2.imread(file_path)
     image = cv2.resize(image, (256, 256))
     image = image.astype('float32') / 255.0  
-    image = np.expand_dims(image, axis=0)
+    image = np.expand_dims(image, axis=0) 
 
     result = model.predict(image)[0][0]
     
@@ -41,6 +41,6 @@ def predict():
 
     return render_template('predict.html', result=prediction)
 
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=True)
+
+if __name__ =='__main__':
+    app.run(debug=True)
