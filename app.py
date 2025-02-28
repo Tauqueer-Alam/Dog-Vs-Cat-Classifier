@@ -2,9 +2,14 @@ from flask import Flask, render_template, request
 import numpy as np
 import os
 import cv2
-from tensorflow.keras.models import load_model
+import tensorflow
 
-model = load_model("model.h5")
+
+model_path = os.path.join(os.path.dirname(__file__), "model.h5")
+model = tensorflow.keras.models.load_model(model_path, compile=False, safe_mode=False)
+
+
+
 
 app = Flask(__name__)
 
@@ -43,5 +48,6 @@ def predict():
 
     return render_template('predict.html', result=prediction)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000)) 
+    app.run(host="0.0.0.0", port=port)
