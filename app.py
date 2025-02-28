@@ -14,7 +14,7 @@ model = tensorflow.keras.models.load_model(model_path, compile=False, safe_mode=
 app = Flask(__name__)
 
 UPLOAD_FOLDER = 'static/uploads'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', "webp}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
